@@ -67,5 +67,5 @@ class UploadFile(models.Model):
     user = models.ForeignKey(User, verbose_name=("Foreign Key"), on_delete=models.CASCADE)
     file_name = models.CharField(("File Name"), max_length=80)
     date =  models.DateField(("Date"), auto_now=True, auto_now_add=False)
-    time =  models.TimeField(("Time"), default=timezone.now())
+    time =  models.TimeField(("Time"), auto_now=True, auto_now_add=False)
     file_path = models.CharField(("FilePath"), max_length=200)

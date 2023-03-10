@@ -98,7 +98,14 @@ class UploadApi(APIView,CustomPagination):
         results,count = self.paginate(page=page, request=request, limit=limit, queryset=upload, view=self)
         serializer = UploadFileSerializer(data = results,many=True)
         serializer.is_valid()
-        return Response({"Data":serializer.data,"page":ceil(count/5)})
+        return Response({"Data":serializer.data,"page":ceil(count/5),"user":request.user.user_name})
+
+    def delete(self,request,id):
+        file = UploadFile.objects.filter(id=id)
+        if os.path.exists(file[0].file_path+file[0].file_name):
+          os.remove(file[0].file_path+file[0].file_name)
+          file.delete()
+          return Response({"msg":"file deleteed successfully"},status=status.HTTP_202_ACCEPTED)
 
 # def download(request):
 #     file_path = "/home/tecblic/Downloads/Log Sheet.xlsx"

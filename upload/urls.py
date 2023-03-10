@@ -12,6 +12,7 @@ urlpatterns = [
     path('register/', views.Register.as_view(), name='register User'),
     path('Verified/<uid>/<token>/',views.UserPasswordResetView.as_view(),name="reset password with Mail"),
     path('download/<int:id>', views.download, name='register User'),
+    path('deletefile/<int:id>', views.UploadApi.as_view(), name='delete File'),
     path('logout/', views.LogOutView.as_view(), name='Logout User'),
     
 ]
